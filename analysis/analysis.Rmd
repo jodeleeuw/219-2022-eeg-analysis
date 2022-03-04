@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(dplyr)
+```
+
+
+# Methods
+
+# Results
+
+```{r Load EEG data, include=FALSE}
+eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
+```
+
+```{r}
+eeg.data %>%
+  group_by(subject, event_type, event_id, good_segment) %>%
+  slice_head(n=1) %>%
+  group_by(subject, event_type, good_segment) %>%
+  summarize(n=n())
+
+```
+
