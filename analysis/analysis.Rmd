@@ -1,10 +1,14 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "A replication of Coulson & Williams (2005)"
+output: rticles::plos_article
 ---
 
-```{r}
+```{r Load Libraries, include=FALSE}
 library(dplyr)
+library(jsonlite)
+library(readr)
+library(stringr)
+library(ggplot2)
 ```
 
 
@@ -12,8 +16,52 @@ library(dplyr)
 
 # Results
 
+## Behavioral
+
+```{r Load Behavioral Data, include=FALSE}
+json.files <- list.files(path="data", pattern=".json", full.names = TRUE)
+experiment.data <- lapply(json.files, fromJSON) %>% bind_rows()
+
+naming.data <- read_csv("data/verbal_responses_EEG_2022.csv")
+```
+
+```{r Create merged naming data, include=FALSE}
+trial.info <- experiment.data %>%
+  filter(task == "test-response") %>%
+  select(subject_id, left_or_right, sentence_type) %>%
+  group_by(subject_id) %>%
+  mutate(trial = 1:n()) %>%
+  mutate(subject_id = if_else(subject_id == "19\\", "19", subject_id))
+
+merged.naming.data <- naming.data %>%
+  mutate(subject_id = str_pad(as.character(subject), 2, side="left", pad="0")) %>%
+  left_join(trial.info, by=c("subject_id", "trial")) %>%
+  select(subject_id, trial, left_or_right, sentence_type, correct)
+
+write_csv(merged.naming.data, file="data/delayed_naming.csv")
+```
+
+### Delayed Naming Task
+
+```{r Compute Delayed Naming Accuracy, include=FALSE}
+delayed.naming.subject.data <- merged.naming.data %>%
+  group_by(subject_id, left_or_right, sentence_type) %>%
+  summarize(m.subject = mean(correct))
+
+delayed.naming.data <- delayed.naming.subject.data %>%
+  group_by(left_or_right, sentence_type) %>%
+  summarize(m = mean(m.subject), se=sd(m.subject) / sqrt(n()))
+```
+
+```{r Plot Delayed Naming Accuracy, echo=FALSE}
+ggplot(delayed.naming.data, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, color=left_or_right))+
+  geom_pointrange(position= position_dodge(width=0.25))+
+  labs(x="Sentence Type", y="Proportion Correct", color="Visual Field")+
+  theme_bw()
+```
+
 ```{r Load EEG data, include=FALSE}
-eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
+eeg.data <- readRDS("data/epochs.rds")
 ```
 
 ```{r}
