@@ -82,12 +82,10 @@ segment <- function(data, start, end, offset, sampling_rate){
 artifact_rejection <- function(epochs, max_range){
   d <- epochs %>% group_by(event_id, electrode) %>%
     summarize(r = max(v) - min(v)) %>%
-    mutate(in_threshold = r <= max_range) %>%
-    group_by(event_id) %>%
-    summarize(good_segment = all(in_threshold))
+    mutate(good_segment = r <= max_range)
   
   epochs.ar <- epochs %>%
-    left_join(d, by=c("event_id"))
+    left_join(d, by=c("event_id", "electrode"))
   
   return(epochs.ar)
 }
