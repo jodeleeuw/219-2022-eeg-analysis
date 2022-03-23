@@ -38,5 +38,14 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-/analysis/data/eeg/epochs/*
-/analysis/data/eeg/raw/*
+# data files (too big)
+/analysis/data/*
+
+# tex builds
+*.tex
+
+# tex logs
+*.log
+
+# tex renders
+*.pdf
