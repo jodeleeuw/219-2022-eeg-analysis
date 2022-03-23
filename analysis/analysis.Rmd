@@ -60,16 +60,52 @@ ggplot(delayed.naming.data, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, colo
   theme_bw()
 ```
 
+## EEG
+
 ```{r Load EEG data, include=FALSE}
-eeg.data <- readRDS("data/epochs.rds")
+eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
+
+eeg.data <- eeg.data %>%
+  mutate(ending = case_when(
+    event_id %in% c(1,4) ~ "filler",
+    event_id %in% c(2,5) ~ "joke",
+    event_id %in% c(3,6) ~ "nonjoke",
+    event_id %in% c(7,8) ~ "practice",
+  )) %>%
+  mutate(visual_field = case_when(
+    event_id %in% c(1,2,3,7) ~ "left",
+    event_id %in% c(4,5,6,8) ~ "right"
+  ))
 ```
 
-```{r}
-eeg.data %>%
-  group_by(subject, event_type, event_id, good_segment) %>%
-  slice_head(n=1) %>%
-  group_by(subject, event_type, good_segment) %>%
-  summarize(n=n())
+### N1
 
+```{r N1 data, include=FALSE}
+n1.data <- eeg.data %>%
+  filter(electrode %in% c("P7", "P8", "O1", "O2")) %>%
+  filter(ending != "practice") %>%
+  mutate(hemisphere = if_else(electrode %in% c("P7", "O1"), "left", "right"))
 ```
 
+```{r N1 ERPs, include=FALSE}
+n1.erps <- n1.data %>%
+  filter(good_segment == TRUE) %>%
+  group_by(subject, electrode, visual_field, t) %>%
+  summarize(mean.v = mean(v))
+
+n1.erps.grand.average <- n1.erps %>%
+  group_by(electrode, visual_field, t) %>%
+  summarize(m = mean(mean.v), se=sd(mean.v)/sqrt(n()))
+```
+
+```{r Plot N1 ERPs, echo=FALSE}
+ggplot(n1.erps.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=visual_field, fill=visual_field))+
+  geom_hline(yintercept = 0)+
+  geom_vline(xintercept = 0)+
+  geom_ribbon(color=NA, alpha=0.2)+
+  geom_line(size=0.8)+
+  #coord_cartesian(xlim=c(-100,500))+
+  facet_wrap(~electrode)+
+  theme_minimal()+
+  theme(panel.grid = element_blank())
+```
