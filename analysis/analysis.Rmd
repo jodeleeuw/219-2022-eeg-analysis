@@ -9,6 +9,7 @@ library(jsonlite)
 library(readr)
 library(stringr)
 library(ggplot2)
+library(tidyr)
 ```
 
 
@@ -67,14 +68,14 @@ eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
 
 eeg.data <- eeg.data %>%
   mutate(ending = case_when(
-    event_id %in% c(1,4) ~ "filler",
-    event_id %in% c(2,5) ~ "joke",
-    event_id %in% c(3,6) ~ "nonjoke",
-    event_id %in% c(7,8) ~ "practice",
+    event_type %in% c(1,4) ~ "filler",
+    event_type %in% c(2,5) ~ "joke",
+    event_type %in% c(3,6) ~ "nonjoke",
+    event_type %in% c(7,8) ~ "practice",
   )) %>%
   mutate(visual_field = case_when(
-    event_id %in% c(1,2,3,7) ~ "left",
-    event_id %in% c(4,5,6,8) ~ "right"
+    event_type %in% c(1,2,3,7) ~ "left",
+    event_type %in% c(4,5,6,8) ~ "right"
   ))
 ```
 
@@ -106,6 +107,66 @@ ggplot(n1.erps.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=visual_f
   geom_line(size=0.8)+
   #coord_cartesian(xlim=c(-100,500))+
   facet_wrap(~electrode)+
+  theme_minimal()+
+  theme(panel.grid = element_blank())
+```
+
+### N400
+
+```{r Filter N400 data, include=FALSE}
+n4.data <- eeg.data %>%
+  filter(electrode %in% c("P3", "P4", "Pz")) %>%
+  filter(ending != "practice")
+```
+
+```{r Subject N400 ERPs, include=FALSE}
+n4.erps <- n4.data %>%
+  filter(good_segment == TRUE) %>%
+  group_by(subject, ending, visual_field, t) %>%
+  summarize(mean.v = mean(v))
+```
+
+```{r Grand Average N400 ERPs, include=FALSE}
+n4.erps.grand.average <- n4.erps %>%
+  group_by(ending, visual_field, t) %>%
+  summarize(m = mean(mean.v), se=sd(mean.v) / sqrt(n()))
+```
+
+```{r Plot N400 ERP, echo=FALSE}
+ggplot(n4.erps.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=ending, fill=ending))+
+  geom_hline(yintercept = 0)+
+  geom_vline(xintercept = 0)+
+  geom_ribbon(color=NA, alpha=0.2)+
+  geom_line(size=0.8)+
+  #coord_cartesian(xlim=c(-100,500))+
+  facet_wrap(~visual_field)+
+  theme_minimal()+
+  theme(panel.grid = element_blank())
+```
+
+```{r Calculate N400 difference waves, include=FALSE}
+n4.difference.waves <- n4.erps %>%
+  pivot_wider(names_from = ending, values_from = mean.v) %>%
+  mutate(joke.filler.diff = joke - filler) %>%
+  mutate(nonjoke.filler.diff = nonjoke - filler) %>%
+  select(-joke, -filler, -nonjoke) %>%
+  pivot_longer(c('joke.filler.diff', 'nonjoke.filler.diff'), names_to = "ending", values_to = "diff.v")
+```
+
+```{r Calculate grand average N400 difference waves, include=FALSE}
+n4.difference.waves.grand.average <- n4.difference.waves %>%
+  group_by(ending, visual_field, t) %>%
+  summarize(m = mean(diff.v), se=sd(diff.v) / sqrt(n()))
+```
+
+```{r Plot Difference Waves N400, echo=FALSE}
+ggplot(n4.difference.waves.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=ending, fill=ending))+
+  geom_hline(yintercept = 0)+
+  geom_vline(xintercept = 0)+
+  geom_ribbon(color=NA, alpha=0.2)+
+  geom_line(size=0.8)+
+  #coord_cartesian(xlim=c(-100,500))+
+  facet_wrap(~visual_field)+
   theme_minimal()+
   theme(panel.grid = element_blank())
 ```
