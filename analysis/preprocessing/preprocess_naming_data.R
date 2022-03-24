@@ -1,7 +1,7 @@
-json.files <- list.files(path="data", pattern=".json", full.names = TRUE)
+json.files <- list.files(path="data/behavioral/raw", pattern=".json", full.names = TRUE)
 experiment.data <- lapply(json.files, fromJSON) %>% bind_rows()
 
-naming.data <- read_csv("data/verbal_responses_EEG_2022.csv")
+naming.data <- read_csv("data/behavioral/raw/EEG experiment 2022 verbal responses - ALL SUBJECTS.csv")
 
 trial.info <- experiment.data %>%
   filter(task == "test-response") %>%
@@ -15,4 +15,4 @@ merged.naming.data <- naming.data %>%
   left_join(trial.info, by=c("subject_id", "trial")) %>%
   select(subject_id, trial, left_or_right, sentence_type, correct)
 
-write_csv(merged.naming.data, file="data/delayed_naming.csv")
+write_csv(merged.naming.data, file="data/behavioral/generated/delayed_naming.csv")

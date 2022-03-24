@@ -20,32 +20,18 @@ library(tidyr)
 ## Behavioral
 
 ```{r Load Behavioral Data, include=FALSE}
-json.files <- list.files(path="data", pattern=".json", full.names = TRUE)
-experiment.data <- lapply(json.files, fromJSON) %>% bind_rows()
-
-naming.data <- read_csv("data/verbal_responses_EEG_2022.csv")
+json.files <- list.files(path="data/behavioral/raw", pattern=".json", full.names = TRUE)
+behavioral.data <- lapply(json.files, fromJSON) %>% bind_rows()
 ```
 
-```{r Create merged naming data, include=FALSE}
-trial.info <- experiment.data %>%
-  filter(task == "test-response") %>%
-  select(subject_id, left_or_right, sentence_type) %>%
-  group_by(subject_id) %>%
-  mutate(trial = 1:n()) %>%
-  mutate(subject_id = if_else(subject_id == "19\\", "19", subject_id))
-
-merged.naming.data <- naming.data %>%
-  mutate(subject_id = str_pad(as.character(subject), 2, side="left", pad="0")) %>%
-  left_join(trial.info, by=c("subject_id", "trial")) %>%
-  select(subject_id, trial, left_or_right, sentence_type, correct)
-
-write_csv(merged.naming.data, file="data/delayed_naming.csv")
+```{r Load merged naming data, include=FALSE}
+naming.data <- read_csv('data/behavioral/generated/delayed_naming.csv')
 ```
 
 ### Delayed Naming Task
 
 ```{r Compute Delayed Naming Accuracy, include=FALSE}
-delayed.naming.subject.data <- merged.naming.data %>%
+delayed.naming.subject.data <- naming.data %>%
   group_by(subject_id, left_or_right, sentence_type) %>%
   summarize(m.subject = mean(correct))
 
@@ -60,6 +46,32 @@ ggplot(delayed.naming.data, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, colo
   labs(x="Sentence Type", y="Proportion Correct", color="Visual Field")+
   theme_bw()
 ```
+### Comprehension Task
+
+```{r Filter comprehension task data, include=FALSE}
+comprehension.data <- behavioral.data %>%
+  filter(task=="test-response") %>%
+  select(subject_id, response, correct_response, correct, left_or_right, sentence_type)
+```
+
+```{r Subject-level comprehension data, include=FALSE}
+comprehension.subject.data <- comprehension.data %>%
+  group_by(subject_id, left_or_right, sentence_type) %>%
+  summarize(m.subject = mean(correct))
+```
+
+```{r Group-level comprehension data, include=FALSE}
+comprehension.summary <- comprehension.subject.data %>%
+  group_by(left_or_right, sentence_type) %>%
+  summarize(m = mean(m.subject), se=sd(m.subject)/sqrt(n()))
+```
+
+```{r Plot group-level comprehension data, echo=FALSE}
+ggplot(comprehension.summary, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, color=left_or_right))+
+  geom_pointrange(position= position_dodge(width=0.25))+
+  labs(x="Sentence Type", y="Proportion Correct", color="Visual Field")+
+  theme_bw()
+```
 
 ## EEG
 
@@ -67,11 +79,11 @@ ggplot(delayed.naming.data, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, colo
 eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
 
 eeg.data <- eeg.data %>%
+  filter(event_type %in% 1:6) %>%
   mutate(ending = case_when(
     event_type %in% c(1,4) ~ "filler",
     event_type %in% c(2,5) ~ "joke",
-    event_type %in% c(3,6) ~ "nonjoke",
-    event_type %in% c(7,8) ~ "practice",
+    event_type %in% c(3,6) ~ "nonjoke"
   )) %>%
   mutate(visual_field = case_when(
     event_type %in% c(1,2,3,7) ~ "left",
@@ -79,10 +91,23 @@ eeg.data <- eeg.data %>%
   ))
 ```
 
+```{r Remove trials with failed delayed naming, include=FALSE}
+naming.correct <- naming.data %>%
+  mutate(subject=subject_id) %>%
+  select(subject, trial, correct) 
+
+eeg.data.filtered <- eeg.data %>%
+  group_by(subject) %>%
+  mutate(trial = event_id - min(event_id) + 1) %>%
+  ungroup() %>%
+  left_join(naming.correct, by=c("subject", "trial")) %>%
+  filter(correct==1)
+```
+
 ### N1
 
 ```{r N1 data, include=FALSE}
-n1.data <- eeg.data %>%
+n1.data <- eeg.data.filtered %>%
   filter(electrode %in% c("P7", "P8", "O1", "O2")) %>%
   filter(ending != "practice") %>%
   mutate(hemisphere = if_else(electrode %in% c("P7", "O1"), "left", "right"))
@@ -114,7 +139,7 @@ ggplot(n1.erps.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=visual_f
 ### N400
 
 ```{r Filter N400 data, include=FALSE}
-n4.data <- eeg.data %>%
+n4.data <- eeg.data.filtered %>%
   filter(electrode %in% c("P3", "P4", "Pz")) %>%
   filter(ending != "practice")
 ```
