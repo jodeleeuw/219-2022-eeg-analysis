@@ -3,7 +3,7 @@ library(dplyr)
 
 all.eeg.epoch.files <- list.files(path="/scratch/jdeleeuw/219-2022-eeg/preprocessed/", pattern=".csv", full.names = T)
 
-all.eeg.epochs <- lapply(all.eeg.epoch.files, read_csv)
+all.eeg.epochs <- lapply(all.eeg.epoch.files, read_csv, col_types="iiicddlc")
 
 all.eeg.epochs.df <- bind_rows(all.eeg.epochs)
 
