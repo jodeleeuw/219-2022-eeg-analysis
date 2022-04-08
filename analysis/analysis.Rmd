@@ -1,6 +1,6 @@
 ---
 title: "A replication of Coulson & Williams (2005)"
-output: rticles::plos_article
+output: html_notebook
 ---
 
 ```{r Load Libraries, include=FALSE}
@@ -10,21 +10,25 @@ library(readr)
 library(stringr)
 library(ggplot2)
 library(tidyr)
+library(ez)
 ```
 
+# Introduction
+
+> The purpose of an introduction in a research article is to clearly convey the rationale for the empirical work. The introduction should explain why the study was done, usually by explaining one or more unresolved questions in existing research and/or theory and describing how the experiment will help to answer those questions. For this assignment, this is a short (approx. 3 paragraphs) description about the need for replications in general and the general findings and theoretical relevance of the original study.
 
 # Methods
 
+> A complete methods section should provide sufficient detail that someone could conduct a replication of the experiment without seeking out additional information from the researchers. Note that “sufficient detail” is a subjective judgment about what aspects of the method are crucial to reproduce the study and which aspects are free to change. For example, we don’t usually report the clothes that participants wore in the experiment, because we don’t believe that the experimental results depend on this factor. A typical methods section has a Participants section, a Materials section, and a Procedure section. I sometimes omit the Materials section in my own work because I find it clearer to describe these details in the context of the procedure. You can choose what to do here. Because this study is a replication, your methods section can be shorter than usual by referring to the original study for details. You should provide enough information that a reader doesn’t need to consult with the original study to understand the gist of the experiment, but you don’t need to be super detailed. You should pay careful attention to and describe all deviations from the original protocol.
+
 # Results
+
+> The results section should describe the analysis in sufficient detail that someone could reproduce your analysis if given the raw data. Note that one advantage of an R Notebook is that the code to do the analysis is right there in the document, so this is a pretty easy thing to do in this context! While the focus of a results section is on the analytical work, a good results section will carefully guide the reader through the analysis, explaining why each critical statistical test was conducted (e.g., by connecting it back to the questions raised in the introduction) and doing a little bit of interpretative work to explain the outcomes of each step. 
 
 ## Behavioral
 
 ```{r Load Behavioral Data, include=FALSE}
-json.files <- list.files(path="data/behavioral/raw", pattern=".json", full.names = TRUE)
-behavioral.data <- lapply(json.files, fromJSON) %>% bind_rows()
-```
-
-```{r Load merged naming data, include=FALSE}
+behavioral.data <- read_csv('data/behavioral/generated/jspsych.csv')
 naming.data <- read_csv('data/behavioral/generated/delayed_naming.csv')
 ```
 
@@ -33,7 +37,12 @@ naming.data <- read_csv('data/behavioral/generated/delayed_naming.csv')
 ```{r Compute Delayed Naming Accuracy, include=FALSE}
 delayed.naming.subject.data <- naming.data %>%
   group_by(subject_id, left_or_right, sentence_type) %>%
-  summarize(m.subject = mean(correct))
+  summarize(m.subject = mean(correct)) %>%
+  mutate(
+    subject_id = factor(subject_id),
+    left_or_right = factor(left_or_right),
+    sentence_type = factor(sentence_type))
+         
 
 delayed.naming.data <- delayed.naming.subject.data %>%
   group_by(left_or_right, sentence_type) %>%
@@ -42,16 +51,29 @@ delayed.naming.data <- delayed.naming.subject.data %>%
 
 ```{r Plot Delayed Naming Accuracy, echo=FALSE}
 ggplot(delayed.naming.data, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, color=left_or_right))+
-  geom_pointrange(position= position_dodge(width=0.25))+
-  labs(x="Sentence Type", y="Proportion Correct", color="Visual Field")+
+  geom_point(position = position_dodge(width=0.25))+
+  geom_errorbar(position = position_dodge(width=0.25), width=0.1)+
+  labs(x="Sentence Ending Type", y="Proportion Correct", color="Visual Field")+
+  scale_color_brewer(type="qual", palette = "Set1", labels=c("Left", "Right"))+
+  scale_x_discrete(labels=c("Expected", "Unexpected Joke", "Unexpected Non-Joke"))+
   theme_bw()
 ```
+```{r ANOVA for delayed naming data, message=FALSE, warning=FALSE, echo=FALSE}
+delayed.naming.anova <- ezANOVA(delayed.naming.subject.data, dv=m.subject, within = c(sentence_type, left_or_right), wid=subject_id)
+
+delayed.naming.anova$ANOVA
+```
+
 ### Comprehension Task
 
 ```{r Filter comprehension task data, include=FALSE}
 comprehension.data <- behavioral.data %>%
   filter(task=="test-response") %>%
-  select(subject_id, response, correct_response, correct, left_or_right, sentence_type)
+  select(subject_id, response, correct_response, correct, left_or_right, sentence_type) %>%
+  mutate(
+    subject_id = factor(subject_id),
+    left_or_right = factor(left_or_right),
+    sentence_type = factor(sentence_type))
 ```
 
 ```{r Subject-level comprehension data, include=FALSE}
@@ -68,27 +90,24 @@ comprehension.summary <- comprehension.subject.data %>%
 
 ```{r Plot group-level comprehension data, echo=FALSE}
 ggplot(comprehension.summary, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, color=left_or_right))+
-  geom_pointrange(position= position_dodge(width=0.25))+
+  geom_point(position = position_dodge(width=0.25))+
+  geom_errorbar(position = position_dodge(width=0.25), width=0.1)+
   labs(x="Sentence Type", y="Proportion Correct", color="Visual Field")+
+  scale_color_brewer(type="qual", palette = "Set1", labels=c("Left", "Right"))+
+  scale_x_discrete(labels=c("Expected", "Unexpected Joke", "Unexpected Non-Joke"))+
   theme_bw()
+```
+
+```{r ANOVA for comprehension, message=FALSE, warning=FALSE, echo=FALSE}
+comprehension.anova <- ezANOVA(comprehension.subject.data, dv=m.subject, within = c(sentence_type, left_or_right), wid=subject_id)
+
+comprehension.anova$ANOVA
 ```
 
 ## EEG
 
 ```{r Load EEG data, include=FALSE}
-eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
-
-eeg.data <- eeg.data %>%
-  filter(event_type %in% 1:6) %>%
-  mutate(ending = case_when(
-    event_type %in% c(1,4) ~ "filler",
-    event_type %in% c(2,5) ~ "joke",
-    event_type %in% c(3,6) ~ "nonjoke"
-  )) %>%
-  mutate(visual_field = case_when(
-    event_type %in% c(1,2,3,7) ~ "left",
-    event_type %in% c(4,5,6,8) ~ "right"
-  ))
+eeg.data <- readRDS("data/eeg/epochs/epochs_filtered.rds")
 ```
 
 ```{r Remove trials with failed delayed naming, include=FALSE}
@@ -105,6 +124,8 @@ eeg.data.filtered <- eeg.data %>%
 ```
 
 ### N1
+
+#### ERP Figure
 
 ```{r N1 data, include=FALSE}
 n1.data <- eeg.data.filtered %>%
@@ -130,13 +151,60 @@ ggplot(n1.erps.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=visual_f
   geom_vline(xintercept = 0)+
   geom_ribbon(color=NA, alpha=0.2)+
   geom_line(size=0.8)+
+  labs(x="Time since final word onset (ms)", y="Microvolts")+
+  scale_color_brewer(type="qual", palette = "Set1", name="Visual Field", labels=c("Left", "Right"))+
+  scale_fill_brewer(type="qual", palette = "Set1", name="Visual Field", labels=c("Left", "Right"))+
   #coord_cartesian(xlim=c(-100,500))+
   facet_wrap(~electrode)+
   theme_minimal()+
   theme(panel.grid = element_blank())
 ```
 
+#### Good Segments
+
+```{r Get Segments for N1 ANOVA, include=FALSE}
+n1.time.window <- 75:175 
+
+n1.anova.trial.data <- n1.data %>%
+  filter(t %in% n1.time.window) %>%
+  filter(good_segment == TRUE) %>%
+  group_by(subject, trial, visual_field, hemisphere) %>%
+  summarize(v = mean(v))
+```
+
+
+This table is the number of good segments for each subject in each cell of the ANOVA (visual_field x hemisphere).
+
+```{r Report Good Segments, echo=FALSE}
+n1.good.segments <- n1.anova.trial.data %>%
+  group_by(subject, visual_field, hemisphere) %>%
+  summarize(n = n())
+
+n1.good.segments
+```
+
+The smallest number is `r min(n1.good.segments$n)` and the largest is `r max(n1.good.segments$n)` out of 120 possible segments. Note that these numbers also factor in excluded segments for when a participant did give the correct answer in the delayed naming task.
+
+#### ANOVA
+
+```{r N1 ANOVA data, include=FALSE}
+n1.anova.data <- n1.anova.trial.data %>%
+  group_by(subject, visual_field, hemisphere) %>%
+  mutate(subject = factor(subject),
+         visual_field = factor(visual_field),
+         hemisphere = factor(hemisphere)) %>%
+  summarize(M = mean(v))
+```
+
+```{r N1 ANOVA, echo=FALSE}
+n1.anova <- ezANOVA(n1.anova.data, dv=M, within=c(visual_field, hemisphere), wid=subject)
+
+n1.anova$ANOVA
+```
+
 ### N400
+
+#### ERP Figure
 
 ```{r Filter N400 data, include=FALSE}
 n4.data <- eeg.data.filtered %>%
@@ -147,27 +215,36 @@ n4.data <- eeg.data.filtered %>%
 ```{r Subject N400 ERPs, include=FALSE}
 n4.erps <- n4.data %>%
   filter(good_segment == TRUE) %>%
-  group_by(subject, ending, visual_field, t) %>%
-  summarize(mean.v = mean(v))
+  group_by(subject, electrode, ending, visual_field, t) %>%
+  summarize(mean.v = mean(v)) %>%
+  mutate(visual_field = case_when(
+    visual_field == "left" ~ "Left VF / Right Hemisphere",
+    visual_field == "right" ~ "Right VF / Left Hemisphere"
+  ))
 ```
 
 ```{r Grand Average N400 ERPs, include=FALSE}
 n4.erps.grand.average <- n4.erps %>%
-  group_by(ending, visual_field, t) %>%
+  group_by(electrode, ending, visual_field, t) %>%
   summarize(m = mean(mean.v), se=sd(mean.v) / sqrt(n()))
+  
 ```
 
-```{r Plot N400 ERP, echo=FALSE}
+```{r Plot N400 ERP, echo=FALSE, fig.width=9}
 ggplot(n4.erps.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=ending, fill=ending))+
   geom_hline(yintercept = 0)+
   geom_vline(xintercept = 0)+
   geom_ribbon(color=NA, alpha=0.2)+
   geom_line(size=0.8)+
-  #coord_cartesian(xlim=c(-100,500))+
-  facet_wrap(~visual_field)+
+  labs(x="Time since final word onset (ms)", y="Microvolts")+
+  scale_color_brewer(type="qual", palette = "Dark2", name="Sentence Ending", labels=c("Expected", "Unexpected Joke", "Unexpected Non-joke"))+
+  scale_fill_brewer(type="qual", palette = "Dark2", name="Sentence Ending", labels=c("Expected", "Unexpected Joke", "Unexpected Non-joke"))+
+  facet_grid(electrode~visual_field)+
   theme_minimal()+
   theme(panel.grid = element_blank())
 ```
+
+#### Difference Waves
 
 ```{r Calculate N400 difference waves, include=FALSE}
 n4.difference.waves <- n4.erps %>%
@@ -180,18 +257,85 @@ n4.difference.waves <- n4.erps %>%
 
 ```{r Calculate grand average N400 difference waves, include=FALSE}
 n4.difference.waves.grand.average <- n4.difference.waves %>%
-  group_by(ending, visual_field, t) %>%
+  group_by(electrode, ending, visual_field, t) %>%
   summarize(m = mean(diff.v), se=sd(diff.v) / sqrt(n()))
 ```
 
-```{r Plot Difference Waves N400, echo=FALSE}
+```{r Plot Difference Waves N400, echo=FALSE, fig.width=9}
 ggplot(n4.difference.waves.grand.average, aes(x=t, y=m, ymin=m-se, ymax=m+se, color=ending, fill=ending))+
   geom_hline(yintercept = 0)+
   geom_vline(xintercept = 0)+
   geom_ribbon(color=NA, alpha=0.2)+
   geom_line(size=0.8)+
-  #coord_cartesian(xlim=c(-100,500))+
-  facet_wrap(~visual_field)+
+  labs(x="Time since final word onset (ms)", y="Microvolts")+
+  scale_color_brewer(type="qual", palette = "Set2", name="Sentence Ending", labels=c("Expected - Unexpected Joke", "Expected - Unexpected Non-joke"))+
+  scale_fill_brewer(type="qual", palette = "Set2", name="Sentence Ending", labels=c("Expected - Unexpected Joke", "Expected - Unexpected Non-joke"))+
+  facet_grid(electrode~visual_field)+
   theme_minimal()+
   theme(panel.grid = element_blank())
 ```
+
+#### Good Segments
+
+```{r Get Segments for N4 ANOVA, include=FALSE}
+n4.time.window <- 300:500
+
+n4.anova.trial.data <- n4.data %>%
+  filter(t %in% n4.time.window) %>%
+  filter(good_segment == TRUE) %>%
+  group_by(subject, trial, visual_field, ending) %>%
+  summarize(v = mean(v))
+```
+
+
+This table is the number of good segments for each subject in each cell of the ANOVA (visual_field x hemisphere).
+
+```{r N4 Report Good Segments, echo=FALSE, message=FALSE, warning=FALSE}
+n4.good.segments <- n4.anova.trial.data %>%
+  group_by(subject, ending, visual_field) %>%
+  summarize(n = n())
+
+n4.good.segments
+```
+
+The smallest number is `r min(n4.good.segments$n)` and the largest is `r max(n4.good.segments$n)` out of 40 possible segments. Note that these numbers also factor in excluded segments for when a participant did give the correct answer in the delayed naming task.
+
+#### ANOVA
+
+```{r N4 ANOVA data, include=FALSE}
+n4.anova.data <- n4.anova.trial.data %>%
+  group_by(subject, visual_field, ending) %>%
+  mutate(subject = factor(subject),
+         visual_field = factor(visual_field),
+         ending = factor(ending)) %>%
+  summarize(M = mean(v))
+```
+
+```{r N4 ANOVA, echo=FALSE}
+n4.anova <- ezANOVA(n4.anova.data, dv=M, within=c(visual_field, ending), wid=subject)
+
+n4.anova$ANOVA
+```
+Follow-up to this result: Is there a difference between non-joke and joke endings? We can use the difference waves to figure this out. Run another ANOVA on just the difference wave data to see if there is an effect of ending.
+
+```{r N4 difference wave ANOVA, echo=FALSE}
+n4.difference.waves.anova.data <- n4.difference.waves %>%
+  filter(t %in% n4.time.window) %>%
+  group_by(subject, visual_field, ending) %>%
+  mutate(
+    subject = factor(subject),
+    visual_field = factor(visual_field),
+    ending = factor(ending)) %>%
+  summarize(M = mean(diff.v))
+
+n4.dw.anova <- ezANOVA(n4.difference.waves.anova.data, dv=M, within=c(visual_field, ending), wid=subject)
+
+n4.dw.anova$ANOVA
+```
+# Discussion
+
+> The goal of a discussion section is to answer the question: what do we now know about our original questions that we didn’t know before conducting the research? There are many different stylistic approaches to a discussion section, so you’ll have to find what is comfortable for you. In this assignment, the discussion should focus on the ways in which our study did or did not replicate the original experiment.
+
+# References
+
+> A complete reference list in APA format. 

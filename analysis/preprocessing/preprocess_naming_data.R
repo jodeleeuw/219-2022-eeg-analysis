@@ -1,7 +1,17 @@
+library(jsonlite)
+library(dplyr)
+library(readr)
+library(stringr)
+
 json.files <- list.files(path="data/behavioral/raw", pattern=".json", full.names = TRUE)
 experiment.data <- lapply(json.files, fromJSON) %>% bind_rows()
 
 naming.data <- read_csv("data/behavioral/raw/EEG experiment 2022 verbal responses - ALL SUBJECTS.csv")
+
+experiment.data.subject.fix <- experiment.data %>%
+  mutate(subject_id = if_else(subject_id == "19\\", "19", subject_id))
+
+write_csv(experiment.data.subject.fix, file="data/behavioral/generated/jspsych.csv")
 
 trial.info <- experiment.data %>%
   filter(task == "test-response") %>%
