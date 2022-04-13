@@ -1,6 +1,8 @@
 # this script is to remove extra information from the EEG epochs to make the
 # data frame smaller for processing in memory
 
+library(dplyr)
+
 eeg.data <- readRDS("data/eeg/epochs/epochs.rds")
 
 needed.electrodes <- c("P7", "P8", "O1", "O2", "P3", "P4", "Pz")
