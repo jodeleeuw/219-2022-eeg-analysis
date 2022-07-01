@@ -1,6 +1,185 @@
 ---
 title: "A replication of Coulson & Williams (2005)"
-output: html_notebook
+shorttitle: "Replication Coulson & Williams (2005)"
+
+author:
+  - name: Joshua R. de Leeuw
+    affiliation: '1'
+    role:
+      - Conceptualization
+      - Data curation
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Project administration
+      - Software
+      - Supervision
+      - Validation
+      - Visualization
+      - Writing - original draft
+      - Writing - review & editing
+    corresponding: yes
+    email: jdeleeuw@vassar.edu
+    address: Enter postal address here
+  - name: Daniel P. Bliss
+    affiliation: '1'
+    role:
+      - Conceptualization
+      - Data curation
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Project administration
+      - Software
+      - Supervision
+      - Visualization
+  - name: Martin Burstein
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Visualization
+  - name: Nona Chen
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Visualization
+  - name: Julissa Coplin
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Duc Dang
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Mira Genkovska
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Chuqi Hu
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Dora Law
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Software
+  - name: Emma Leshock
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Natasha Orellana
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Shivani Pandey
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Yaser Pena
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Naima Saini
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Raia Stern
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Orcun Tasdemir
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Software
+  - name: Yuchen Wang
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Ava Waters
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Software
+  - name: Zachary Watson
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+  - name: Lily Yan
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+      - Software
+  - name: Yuchen Zhou
+    affiliation: '1'
+    role:
+      - Formal analysis
+      - Investigation
+      - Methodology
+
+affiliation:
+  - id: '1'
+    institution: Department of Cognitive Science, Vassar College
+
+
+abstract: |
+  ADD LATER
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["references.bib"]
+
+floatsintext      : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
 ---
 
 ```{r Load Libraries, include=FALSE}
@@ -51,7 +230,7 @@ delayed.naming.data <- delayed.naming.subject.data %>%
 
 ```{r Plot Delayed Naming Accuracy, echo=FALSE}
 ggplot(delayed.naming.data, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, color=left_or_right))+
-  geom_point(position = position_dodge(width=0.25))+
+  geom_point(position = position_dodge(width=0.25), size=2)+
   geom_errorbar(position = position_dodge(width=0.25), width=0.1)+
   labs(x="Sentence Ending Type", y="Proportion Correct", color="Visual Field")+
   scale_color_brewer(type="qual", palette = "Set1", labels=c("Left", "Right"))+
@@ -90,7 +269,7 @@ comprehension.summary <- comprehension.subject.data %>%
 
 ```{r Plot group-level comprehension data, echo=FALSE}
 ggplot(comprehension.summary, aes(x=sentence_type, y=m, ymin=m-se, ymax=m+se, color=left_or_right))+
-  geom_point(position = position_dodge(width=0.25))+
+  geom_point(position = position_dodge(width=0.25), size=2)+
   geom_errorbar(position = position_dodge(width=0.25), width=0.1)+
   labs(x="Sentence Type", y="Proportion Correct", color="Visual Field")+
   scale_color_brewer(type="qual", palette = "Set1", labels=c("Left", "Right"))+

@@ -46,6 +46,3 @@ vignettes/*.pdf
 
 # tex logs
 *.log
-
-# tex renders
-*.pdf

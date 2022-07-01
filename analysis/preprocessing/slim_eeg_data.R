@@ -14,8 +14,8 @@ eeg.filtered.data <- eeg.data %>%
     event_type %in% c(3,6) ~ "nonjoke"
   )) %>%
   mutate(visual_field = case_when(
-    event_type %in% c(1,2,3) ~ "left",
-    event_type %in% c(4,5,6) ~ "right"
+    event_type %in% c(1,2,3) ~ "right",
+    event_type %in% c(4,5,6) ~ "left"
   ))
 
 saveRDS(eeg.filtered.data, file = "data/eeg/epochs/epochs_filtered.rds")
