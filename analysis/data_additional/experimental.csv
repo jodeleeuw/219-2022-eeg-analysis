@@ -1,0 +1,161 @@
+﻿id,id_2,sentence,joke,nonjoke,joke_question,joke_response,nonjoke_question,nonjoke_response,Joke Cloze Probability,Non-Joke Cloze Probability
+1,1,I let my accountant do my taxes because it saves time: last spring it saved me ten,years,days,My accountant helps me commit tax fraud.,Yes,I am good at doing taxes,No,0,0
+2,2,It is not hard to meet expenses: they are,everywhere,affordable,It is easy to pay expenses.,No,It is hard to pay expenses.,No,0.02,0.06
+3,3,"The last time a guy in a mask took all my money, I was in",surgery,shock,Being operated on costs a lot of money.,Yes,I was robbed.,Yes,0,0.2
+4,4,"My mechanic could not fix my brakes, so he fixed my",horn,clutch,"My mechanic wants me to use the horn to avoid hitting people, instead of the brakes.",Yes,My brakes were repaired at the mechanic,No,0.04,0
+5,5,The only ones who want me for my body are,mosquitoes,losers,People find me very sexy.,No,My body is attractive to everyone,No,0,0.04
+6,6,"By the time Mary had her fourteenth child, she'd run out of names to call her",husband,offspring,Mary is mad at her husband.,Yes,Mary is running out of names for her offspring.,Yes,0,0
+7,7,A device for finding furniture in the dark is a,shin,candle,Sometimes you find furniture by running into it.,Yes,A candle helps you see furniture in the dark.,Yes,0,0
+8,8,My doctor has never violated his oath: the oath he took years ago to become a,millionaire,practitioner,My doctor is motivated by profit.,Yes,My doctor has violated his oath to practice medicine,No,0,0.02
+9,9,"Everyone had so much fun jumping into the swimming pool, we decided to put in a little",water,platform,People were jumping into an empty swimming pool at first.,Yes,People will be able to jump off the platform into the water.,Yes,0.02,0
+10,10,Sunday is the day we bow our heads and,putt,rest,We go golfing on Sunday.,Yes,Sunday is a day of work like any other.,No,0,0
+11,11,Nothing in the known universe travels faster than,gossip,radiation,Gossip spreads quickly.,Yes,We know of substances that are faster than radiation.,No,0,0
+12,12,"He owns stock in a company that pays quarterly dividends, so every three months they send him a",quarter,statement,The company pays him a lot of money every quarter.,No,His company sends him quarterly payments.,Yes,0,0
+13,13,A committee keeps minutes and takes,hours,votes,A committee takes up a lot of time.,Yes,A committee uses votes to function.,Yes,0,0
+14,14,"I decided to start saving for a rainy day, so I went to a bank and deposited my",umbrella,pay,I did not deposit money at the bank,Yes,I saved my money to use later.,Yes,0,0
+15,15,"She told him he looked like a million, and she meant every",century,syllable,She implied that he looked old.,Yes,She implied that he looked attractive.,Yes,0,0
+16,16,Our son brought home a note from school saying they need a written excuse for his,presence,tardiness,Our son is almost always at school on weekdays.,No,Our son arrived to school on time.,No,0,0.04
+17,17,"Where I'm from, the two most common elements are hydrogen and",stupidity,nitrogen,There are a lot of stupid people where I am from.,Yes,There is plenty of hydrogen and nitrogen where I am from.,Yes,0.04,0.08
+18,18,The only thing money can't buy is,poverty,generosity,Money can be used to obtain anything but a lack of money.,Yes,Generosity can be bought with money.,No,0.02,0
+19,19,"He told her he wasn't himself, and she said she'd noticed the",improvement,problem,She likes who he originally was.,No,She can tell that something is not going well with him.,Yes,0,0
+20,20,"Though most people think it's Rome, the world's most beloved capital is actually",dollars,Vienna,Money is the most loved thing.,Yes,Rome is the most loved capital city.,No,0,0
+21,21,Some people think courtship is the first in a series of steps leading to,divorce,romance,Some think all marriages are likely to end in divorce.,Yes,Courtship is important in forming relationships.,Yes,0,0.02
+22,22,"He asked if I'd join him in a bowl of soup, but I told him we didn't have enough",room,change,He wants us to bathe in a bowl of soup.,Yes,We have enough money to pay for the soup.,No,0,0
+23,23,"The cops claimed that the prisoner just decided to come clean, but most people think he was forced into the",bathtub,admission,The prisoner bathed voluntarily.,No,The prisoner confessed.,Yes,0,0.02
+24,24,The best way to remove coffee stains from a white blouse is with,scissors,detergent,The person is recommending that you use detergent for stains.,No,You should use detergent to clean shirts.,Yes,0,0.04
+25,25,No patient should leave the hospital until he's strong enough to face the,cashier,outside,Hospital visits are typically cheap.,No,Patients should be feeling better before they leave the hospital.,Yes,0,0.08
+26,26,His doctor recommended he stay flat on his back ever since he was hit by a,steamroller,motorist,He was flattened in the accident.,Yes,The patient was on a bed rest.,Yes,0,0
+27,27,The best way to keep the milk from turning sour is to keep it in the,cow,cold,"If you don't milk a cow, its milk can't go sour.",Yes,Refrigerating milk is important.,Yes,0,0
+28,28,One person who sure makes a long story short is my,editor,aunt,My editor barely revises my stories,No,My aunt tells long and detailed stories.,No,0.04,0.02
+29,29,I went to a place that serves breakfast any time and ordered French toast in the,Renaissance,nighttime,I went to a restaurant where time travel is possible.,Yes,I had breakfast at night.,Yes,0.02,0
+30,30,She always told girls not to look for a husband but just to date,bachelors,someone,She wants her daughters to date married men.,No,She wants her daughters to settle down.,No,0,0.02
+31,31,One thing that makes the world go round is,detours,greed,Detours force people to take roundabout routes.,Yes,Many people are greedy.,Yes,0,0
+32,32,Another thing that has developed by leaps and bounds is modern,dance,science,Modern dance involves a lot of jumping.,Yes,Science has advanced rapidly.,Yes,0,0.04
+33,33,"Frequent naps prevent old age, especially when taken while",driving,relaxed,Napping while driving is a safe activity,No,Napping has no benefits to aging.,No,0.02,0
+34,34,"I asked the florist what I should give to my girlfriend, and he suggested his",address,tulips,My florist wants to date my girlfriend.,Yes,My florist gave me a flower recommendation.,Yes,0,0.04
+35,35,A vacation is the shortest distance between two,paychecks,locations,Vacations are cheap.,No,Vacations are short.,No,0.02,0.02
+36,36,"He is probably the best boxer in the country, but he always loses in the",city,competition,He is a good boxer in the city.,No,"Despite being good at boxing, he loses competitions.",Yes,0,0
+37,37,"To get something done, a committee should consist of no more than three people, two of whom are",dead,workers,Working with people is efficient.,No,Having 2 workers in a 3-person committee is efficient.,Yes,0,0
+38,38,"I hope this train stops at Grand Central because if it doesn't, there will be a",crash,delay,"If the train can't stop when it's supposed to, it will crash.",Yes,The train will be late if doesn't stop at Grand Central.,Yes,0,0.1
+39,39,We live in a lovely suburb; it's just two miles beyond our,income,town,We live somewhere that's cheap for us.,No,The suburb isn't far from the town.,Yes,0,0.06
+40,40,The book that tells you where you can go on vacation is called a,checkbook,guidebook,The only limit to your vacation plans is your imagination.,No,Guidebooks are helpful when visiting other places.,Yes,0,0.06
+41,41,"Every time I wear my spring coat in the rain, it damages the",springs,sleeves,My coat is made out of springs.,Yes,My coat is waterproof.,No,0,0.02
+42,42,The art museum just acquired an early Rembrandt; it's done in,Crayola,charcoal,Rembrandt drew this picture with crayons early in his life.,Yes,The art museum just recieved a piece of art that Rembrandt made early in his career.,Yes,0,0
+43,43,Some people's only culture is,bacteria,radio,Some people have infections.,Yes,Some people don't go to cultural events. They only listen to the radio.,Yes,0.04,0
+44,44,It's extraordinary what fine poker hands you get when you're playing,bridge,stud,You only ever get good poker hands when you aren't playing poker.,Yes,You don't get good poker hands when playing stud poker.,No,0,0
+45,45,"In the game of golf, nothing counts as much as your",opponent,drives,Golf is easy if you're playing against a professional golfer.,No,Focus on your opponent when playing golf.,No,0,0
+46,46,Autobiography is an unrivaled vehicle for telling the truth about,others,yourself,Autobiographies can be used to talk about other people rather than about yourself.,Yes,"When you write an autobiography, you write it about yourself.",Yes,0.02,0.12
+47,47,"All roads lead to Rome, and all detours lead to",profanity,somewhere,People get upset when they have to take detours when driving.,Yes,Even detours must be a way to get somehwere.,Yes,0,0.02
+48,48,The penalty for dishonesty is the disgrace of dying,rich,unloved,Lying gets you rich.,Yes,People love liars.,No,0,0
+49,49,"Figures don't lie, except on the",beaches,page,People lie down on the beach.,Yes,Numbers can actually be misleading.,Yes,0,0.02
+50,50,"This house comes with lots of extras, mostly",termites,upgrades,The house is in great condition.,No,The house can be improved beyond the base package.,Yes,0,0.02
+51,51,My church welcomes all denominations but prefers,twenties,Mormons,Twenties is the religion of some people in my church.,No,My church is particularly supportive of Mormons.,Yes,0,0
+52,52,Modern science is amazing: garbage is now being made into,movies,gasoline,Movies these days are great.,No,Garbage is being turned into gasoline.,Yes,0,0
+53,53,The only crop that is grown in America and harvested abroad is the American,tourist,tobacco,American tourists stay in the United States.,No,The U.S imports tobacco.,No,0,0
+54,54,The difference between a dog and fox is about five,beers,degrees,Dogs and foxes are easy to tell apart when you're drunk.,No,A dog looks only slightly different from a fox.,Yes,0,0.02
+55,55,The only person who sticks closer to you in adversity than a friend is a,creditor,spouse,Creditors stay close to you in times of adversity because they want you to pay them back.,Yes,Spouses are even more supportive during difficult times than friends.,Yes,0,0.02
+56,56,One good turn gets most of the,blanket,profit,It's hard to make blankets move.,No,Turning around gives you money.,No,0.04,0.02
+57,57,"Many things run in families, especially",noses,strength,Many people in families are sick.,Yes,Strength is a heritable trait.,Yes,0,0
+58,58,The show had one act that was really offbeat: the,singer,clowns,The singer did not perform well.,Yes,The clowns put on an unusual show.,Yes,0,0.02
+59,59,Most of the people running for office are not politicians; they're,commuters,candidates,The commuters are trying to get to their offices quickly.,Yes,The candidates are not politicians yet.,Yes,0,0
+60,60,"She read so much about the bad effects of smoking, she decided she'd have to give up",reading,nicotine,She doesn't want to read about the negative effects of smoking anymore.,Yes,She quit smoking.,Yes,0.12,0
+61,61,I can always tell when my wife is lying just by looking at her. I can also tell when she's,standing,honest,I can tell whether or not my wife is standing up by looking at her.,Yes,I can tell whether or not my wife is telling the truth by looking at her.,Yes,0.05,0.02
+62,62,Every other minute a person gets run over by a car in New York. This is a great health risk for the,person,population,Getting run over by a car is unhealthy.,Yes,The frequency of people getting run over by cars is a problem for public health.,Yes,0.05,0.04
+63,63,The teacher says to the proud mother: Your son is creative and full of new ideas. Especially when it comes to,spelling,music,The son is good at spelling.,No,The son is not a creative musician.,No,0,0
+65,64,"Is it okay for me to start drinking as soon as the kids are at school, or am I just a terrible",teacher,caretaker,I am a teacher drinking in the presence of my students.,Yes,I drink after my children leave the house.,Yes,0.04,0
+66,65,Most people are shocked when they find out how bad I am as an,electrician,actor,I am an incompetent electrician.,Yes,Most people assume I am a bad actor.,No,0.12,0.12
+67,66,"On the other hand, you have different",fingers,opinions,Your two hands are exactly the same.,No,You have the same views as someone else.,No,0.1,0.2
+68,67,She got her good looks from her father; he's a,surgeon,model,Her father performed plastic surgery on her.,Yes,She inherited her good looks from her father.,Yes,0.02,0.23
+70,68,I removed all the bad food from the house. It was,delicious,tiring,I ate all the bad food.,Yes,Throwing out all of the bad food was an easy task,No,0,0
+71,69,The first step in building staircases is often,squeaking,challenging,The first step of a staircase never makes a squeaking noise.,No,Building staircases is hard.,Yes,0,0
+72,70,There are a bunch of different crunches that affect the abs; my favorite is,Nestle's,Reverse,I like eating candy bars and it affects my stomach.,Yes,Reverse crunches are good for the abs.,Yes,0,0
+73,71,"The face of a child can say it all, especially the",mouth,expression,The child uses their mouth to say things.,Yes,You can read a child's emotions by looking at their expression,Yes,0.12,0
+74,72,Money is the root of all,wealth,issues,Having more money makes you wealthier.,Yes,Money is the source of many of the world's problems.,Yes,0,0.26
+75,73,I don't approve of political jokes. I've seen too many of them get,elected,offensive,Politicians are jokes.,Yes,I think political jokes are always appropriate.,No,0.05,0.059
+76,74,Advertising messages have to be made loud and clear for the hard of,thinking,opinion,People easily understand advertisements.,No,Advertisements easily change people's opinions.,No,0,0.02
+135,75,He told me he just bought a set of balloon tires and I told him that I didn't even know he owned a,balloon,vehicle,The tires are for a balloon,Yes,The tires are for a car that I didn't know about.,Yes,0.04,0.04
+81,76,"I was raised as an only child, to the disappointment of my",sister,friends,My parents paid attention to my sister.,No,My friends like the fact that I am an only child.,No,0.04,0.05
+82,77,"You are supposed to learn from your mistakes, so that you don't have more than one",child,failure,Having a child was a mistake.,Yes,Learning from your mistakes causes more mistakes.,No,0.08,0.08
+113,78,I had a very time consuming dinner yesterday: I ate a,clock,lobster,The dinner took a long time to finish.,No,Lobster takes a long time to eat.,Yes,0.08,0.02
+84,79,"If Facebook doesn't get back up soon, I might end up",vaccinated,annoyed,Facebook is preventing me from getting vaccinated.,Yes,I will be irritated if I can't use Facebook soon.,Yes,0,0
+85,80,"Chameleons are supposed to blend well, but I think it's ruined this",smoothie,drawing,The chameleon is in the smoothie.,Yes,You can see the chameleon in the picture.,No,0.08,0
+87,81,"Don't worry, there are no sharks in these waters. They don't get along with the",crocodiles,algae,The water is dangerous.,Yes,"There are no sharks in the water, only algae.",Yes,0,0
+91,82,I got gas for $1.38 today from a,restaurant,Costco,The restaurant sells cheap gasoline.,No,Gasoline is expensive at Costco.,No,0,0.02
+95,83,The Scottish military has eliminated the draft by giving all of its officers,pants,leave,The Scottish military wears kilts but were in need of pants.,Yes,The Scottish military had a leave program before this policy.,No,0.02,0.02
+96,84,My mum asked me if I'd seen the dog bowl; I said I didn't know it,could,disappeared,I knew the dog was good at bowling.,No,The dog bowl is nowhere to be found.,Yes,0,0.18
+97,85,"I haven't slept for ten days, because that would be too",long,boring,I have never slept for 10 days in a row.,Yes,I slept a lot in the past 10 days.,No,0.12,0
+98,86,Arguments between couples are healthy; sometimes they even prevent,marriage,illness,Arguments can prevent couples who aren't compatible from getting married.,Yes,Arguments between couples can lead to healthier lifestyle choices.,Yes,0.06,0.02
+99,87,"Now that the Hollywood couple has ironed out the divorce settlement, they can finally go ahead with their",wedding,career,Hollywood marriages don't last long.,Yes,"Now that they are divorced, both members of the couple can focus on their career.",Yes,0,0
+100,88,One good way to invest in the country is to buy a,congressman,farm,The person is recommending that you invest in the stock market.,No,Buying a farm is a good way to invest.,Yes,0,0
+101,89,"To avoid streaking when cleaning windows, be sure to be",clothed,gentle,If you don't wear clothes while cleaning windows it would be considered streaking.,Yes,"If you use too much force when cleaning windows, they might end up with streaks.",Yes,0,0
+102,90,I'm dying to find out how I look as a,brunette,man,I am changing my hair color.,Yes,I am not interested in what I would look like as a man.,No,0.02,0.3
+103,91,"While I was in quarantine, I decided to take up fencing, but my neighbors said I should give it",back,away,I took the neighbor's fence.,Yes,My neighbors think I should keep my fence.,No,0.04,0.04
+104,92,"Shot my first turkey today, scared everybody in the",supermarket,area,I shot a turkey in the bowling alley.,No,I was hunting a turkey and shot it.,Yes,0,0.04
+105,93,I have a pen that can write underwater and other,words,locations,The pen can write the word 'underwater'.,Yes,The pen can write in water.,Yes,0.06,0
+106,94,"At 4 am this morning the alarm of my neighbor's car went off. I was so startled, I immediately",ran,woke,I was asleep before the alarm went off.,No,My alarm clock woke me up.,No,0.04,0.04
+109,95,I don't belong to an organized political party. I'm a,Democrat,kid,The Democratic party is organized.,No,A kid prefers organized political parties.,No,0.02,0
+110,96,War does not determine who is right - only who is,left,cruel,War makes people dizzy.,No,War is good.,No,0.06,0.02
+111,97,"I want to die peacefully in my sleep, like my grandfather. Not screaming and yelling like his",passengers,niece,The grandfather fell asleep while driving a bus.,Yes,Grandfather died screaming and yelling.,No,0.04,0
+112,98,To steal ideas from one person is called plagiarism. To steal from many is,research,deception,Research is really just using a bunch of other people's ideas.,Yes,It is deceptive to pass others' ideas off as your own.,Yes,0.06,0
+114,99,You're never too old to learn something,stupid,interesting,"When you get older, you will be immune to bad information.",No,You stop learning at a certain age,No,0.02,0
+115,100,Our handyman will repair what your husband,fixed,ruined,"Your husband thinks that he ""fixed"" something, but in reality it still needs to be repaired.",Yes,Your husband broke something and now it needs to be fixed.,Yes,0.02,0
+116,101,A bad banker quickly loses,interest,customers,A bad banker stays focused on one thing.,No,A bad banker has a lot of customers.,No,0.04,0.06
+117,102,A banker will always lend you an umbrella when it's,sunny,needed,Bankers will lend you things that you need.,No,Bankers will lend you things that you need.,Yes,0.02,0
+118,103,"Philadelphia, wonderful town. I spent a week there one",night,summer,The natural law of time does not comply in Philadelphia.,No,I spent a week in Philadelphia last summer.,Yes,0.02,0.2
+119,104,Be careful about reading health books. You may die of a,misprint,disease,The speaker is warning you about missiles.,No,The speaker believes that health books spread disease.,Yes,0.06,0
+120,105,Never leave till tomorrow what you can immediately,forget,finish,You should remember something tomorrow.,No,Finishing later is better than finishing early.,No,0,0.14
+121,106,He is so modest that he pulls down the shade to change his,mind,jacket,The person likes other people to know his thoughts.,No,The person is comfortable being naked in front of others.,No,0,0.02
+122,107,"When I ask the chef how long I should cook the noodles, he said ten",inches,hours,I should use noodles that are at least 1 foot long.,No,Cooking the noodles will take approximately an hour.,No,0.02,0
+123,108,"I don't like people who take drugs, such as",security,singers,I dislike drug users.,No,I dislike drug users.,Yes,0,0
+124,109,"A lot of people are afraid of heights. Not me, I'm afraid of",widths,clowns,"I am afraid of widths, not heights (as in dimensions of objects).",Yes,I am unafraid of clowns.,No,0.02,0.02
+126,110,Autocorrect has become my worst,enema,nemesis,Autocorrect helps with my defecation.,No,Autocorrect is helpful for me.,No,0.06,0
+128,111,"Going paperless at the office is nice, but it causes some problems in the",bathrooms,home,There is toilet paper in the office bathrooms.,No,Not using paper is better in the home than in the office.,No,0,0.08
+129,112,My wife said she saw a dying deer on the way to work this morning. I wonder how she knew it was going to,work,perish,The speaker thinks that the deer has a job.,Yes,My wife did not know that the deer was dying.,No,0.08,0
+130,113,"According to a recent survey, 100 percent of people are willing to answer the",questions,phone,Participants answered only some of the survey questions.,No,Participants did not want to answer the phone.,No,0,0.08
+131,114,"I've had a wonderful evening, but it wasn't",today,perfect,I had a wonderful evening tonight.,No,I did not have a wonderful evening tonight.,No,0,0.08
+132,115,My mom asked me to hand out invitations for my brother's surprise birthday party and that's when I realized he was the favorite,twin,brother,My mom asked me to hand out invitations for my brother's party on my own birthday.,Yes,I am my mom's favorite child.,No,0,0.06
+133,116,"Always give 100 percent, unless it's",blood,painful,You should donate all of your blood.,No,You shouldn't put the maximum amount of effort into something if it hurts.,Yes,0.06,0
+134,117,I just invented a new word:,plagiarism,skaddle,Plagiarism is a new word that I made.,No,I did not create the word skaddle.,No,0,0
+137,118,"I bought coconut shampoo the other day, but I realized I don't even have a",coconut,reason,I think that the shampoo is for washing coconuts.,Yes,I don't know why I bought the coconut shampoo.,Yes,0.08,0.02
+139,119,"For the record, I bought a",turntable,ticket,I bought a record player.,Yes,I bought a record player.,No,0.02,0
+140,120,"Statistics indicate that Americans spend 80 million a year on games of chance, mostly",weddings,dice,Marriage is a big gamble.,Yes,Americans spend a lot on gambling.,Yes,0,0
+141,121,"My husband and I were happy for 20 years, and then we",met,quarantined,We have a happy marriage.,No,Being in quarantine did not affect our marriage.,No,0.02,0.02
+142,122,"If you're not part of the solution, you're part of the",precipitate,issue,Solution here means the answer to a problem.,No,"If you are not helping, you are causing the problem.",Yes,0,0.02
+143,123,The curse of heavy drinking is that afterwards you get a huge,bill,headache,Drinking a lot of alcohol is cheap.,No,"If you drink too much, you'll get hungover.",Yes,0,0.14
+144,124,"I asked him if he started out as an editor, and he said that years ago he used to be a",boy,journalist,The editor only began his career once he was an adult.,Yes,The editor has been an editor their whole life.,No,0,0.08
+145,125,"Congress taxes our income, our property, and our",patience,purchases,Taxes are really annoying.,Yes,We pay taxes on several different things.,Yes,0.02,0.1
+146,126,The best bargain I ever got was when I went to a family garage sale and bought a,grandma,toaster,The garage sale was selling various family members.,Yes,I purchased a lamp.,No,0,0.02
+147,127,One way to keep porn away from teenagers is to put it in a,textbook,cabinet,Teenagers always read their textbooks.,No,Pornography should be hidden from teenagers.,Yes,0.04,0
+148,128,The only place where you can find people who spend all their time minding their own business is the,cemetery,bank,People are so nosy they only mind their business after they're dead.,Yes,People tend to keep to themselves at the bank.,Yes,0.02,0.02
+149,129,"It is hard to raise a family nowadays, especially in the",morning,country,It's hard to get kids out of bed.,Yes,Child-rearing is easy in the country.,No,0,0.02
+150,130,In some marriages the bride is given away by the,press,family,The press leaks news about upcoming weddings.,Yes,"In all marriages, the family sells the bride to the groom.",No,0,0.04
+151,131,"When John bought a bulldog, it was no time at all before he had that dog eating out of his",leg,fingers,John and the dog get along.,No,John and the dog get along.,Yes,0,0
+152,132,"To clothe one soldier, it takes the wool from two sheep and the hides from three",taxpayers,animals,Soldiers' clothing is free.,No,The clothing of soldiers is vegan (no animal products).,No,0,0
+153,133,"Once a week they hold a bingo game, and all the proceeds go to fight",gambling,disease,The fundraiser is solving a problem that it creates.,Yes,The bingo game is infectious.,No,0,0.04
+154,134,The best way to stop an elephant from charging is to cut off its,credit,toes,The elephant is using a credit card.,Yes,The elephant can still charge you without its toes.,No,0,0
+155,135,A good way to blow your mind is to smoke,gunpowder,heroin,Gunpowder is a very safe material to smoke.,No,Heroin is a mild drug with no psychoactive effects.,No,0,0
+156,136,The most prevalent form of legalized gambling is,elections,betting,The election process is not corrupt.,No,Betting is not the primary form of gambling.,No,0,0.04
+157,137,The best gift for the man who has everything is,penicillin,neckties,Pencillin is an appropriate gift for rich people.,No,Neckties make a bad present.,No,0,0
+158,138,Save the whales; start a,collection,coalition,You should save the whales for later by starting a whale collection.,Yes,You should not protect the whales.,No,0,0.02
+159,139,The first two hundred story building opened in Chicago; it was a,library,hotel,A library in Chicago has 200 floors.,No,A hotel in Chicago has 200 books.,No,0.02,0
+160,140,"When reviewing your notes for a test, the most important ones will be",illegible,capitalized,You will be able to read the most important notes that you took for test.,No,The most important notes you took are lowercase.,No,0,0
+161,141,"It's always nicer to give than to receive, especially when it's your",opinion,parents,It is nicer to hear someone else's opinion than to say your own.,No,It is nicer to receive something from your parents than to give something to them.,No,0.02,0
+162,142,"If there's one thing that counts in business, it's",bookkeepers,resources,Bookkeepers are bad at math.,No,Resources are important in business.,Yes,0,0
+163,143,He was teaching his girlfriend how to swim when the lifeguard made them move to the,lake,shallows,The couple was already swimming in the water when the lifeguard moved them.,No,The lifeguard wanted them to practice in the deep end.,No,0,0.04
+164,144,"When the kid came into the store and asked for empty boxes, the owner gave him the",register,crate,The owner is very generous.,No,The owner is very mean.,No,0,0
+165,145,"Nature has three ways of thinning the herd: drought, famine, and",primaries,hunting,The primaries increase the number of candidates.,No,Hunting does not thin the herd.,No,0,0.02
+166,146,Politicians who are as American as apple pie still want their,slice,rewards,"Patriotic politicans don't care about getting their ""slice"" of the pie that is America.",No,American politicians are entirely selfless.,No,0.06,0
+167,147,The difference between a good speaker and a bad one is often a nice,nap,diction,A tired speaker does not talk well.,Yes,Diction doesn't impact speaker quality.,No,0,0
+168,148,"He told me he's not broke, just badly",bent,off,The man snapped in half.,No,He has a lot of money.,No,0.04,0
+169,149,Two things are essential for success: wealth and,money,fame,Money is the only way to guarantee success.,Yes,Wealth and fame are necessary for success.,Yes,0,0
+170,150,"If you're filthy rich, sending your kids to college is a wonderful",cleaner,luxury,College is cheap.,No,Not everyone can afford to send their kids to college.,Yes,0,0.04
+171,151,My husband took the money we were saving to buy a new car and blew it all at the,laundry,tables,We had saved a lot of money for the car.,No,My husband went gambling and won money.,No,0,0
+172,152,The perfect companion to a vegetarian dinner is a,steak,salad,I enjoy meals without meat.,No,Salad is a nice side dish.,Yes,0.04,0.16
+173,153,"Love has its benefits, and they are usually called",alimony,memories,Marriage usually lasts a lifetime.,No,Romance creates lasting memories.,Yes,0,0
+174,154,"When we got divorced, my wife and I split the house; she got the",inside,kitchen,We split the house fairly.,No,We each got different parts of the house.,Yes,0,0.1
+175,155,"She asked what state he was born in, and he said in the",nude,East,He was born clothed.,No,He was born in an Western state.,No,0,0.02
+176,156,The husband who catches his wife in the act is probably on the,trapeze,snoop,The couple is not in the circus.,No,The wife is being faithful.,No,0,0
+177,157,"This new computer works so quickly, it comes complete with",ulcers,games,The computer is relaxed.,No,The computer does not have any games.,No,0,0
+178,158,I know one couple who got divorced and had to leave the house to the,attorney,daughter,The lawyer was cheap.,No,The daughter did not get her parents' house.,No,0,0
+179,159,"When you own an ice cream business, your favorite flavor is",aspirin,everything,Owning an ice cream business is not stressful.,No,"Even if you try a lot of ice cream every day, you will still have one favorite.",No,0.06,0.06
+180,160,Another thing a small boy is constantly outgrowing is his,allowance,underwear,Small boys don't overspend.,No,"As the small boy grows up, he needs to buy new underwear",Yes,0,0
